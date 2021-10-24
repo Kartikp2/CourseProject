@@ -22,7 +22,7 @@ Briefly describe any datasets, algorithms or techniques you plan to use ?
 
 We plan to use course lectures videos (i.e videos of CS 410: Text Information Systems) as the dataset. At a very high level, we tend
 to perform the following :
-1. Scrap the videos along with the transcripts
+1. Scrape the videos along with the transcripts
 2. Extract documents out of scrapped videos and transcripts and build an association between them
 3. Use Tokenizer(Stemming and other normalization techniques) to extract lexical units (words)
 4. Use an Indexer (inverted Index) for faster response from the Search Engine.
@@ -37,7 +37,7 @@ in the UI. The results would provide links to the video segments.
 How will you demonstrate that your approach will work as expected?
 
 Demo video for the demonstration. We will try to search for concept as keywords used in our lectures and the results should contain
-video segments related to he concepts.
+video segments related to the concepts.
 
 Which programming language do you plan to use?
 
