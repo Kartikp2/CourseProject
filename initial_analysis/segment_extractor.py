@@ -15,14 +15,18 @@ def get_segment_details(course_id, week_nbr, video_id, segment_raw_txt):
     segment = {}
 
     segment_content = segment_raw_txt.split("\n")
-    seg_id = segment_content[0] #cue
+    seg_id = int(segment_content[0]) #cue
     timeline = segment_content[1].split(" --> ")
 
     key    = str(course_id) + "_" + str(week_nbr) + "_" + str(video_id) + "_" + str(seg_id)
     segment["key"] = key
+    segment["course_id"] = course_id
+    segment["week_nbr"] = week_nbr
+    segment["video_id"] = video_id
 
     segment["timeline_start"] = timeline[0]
     segment["timeline_end"]   = timeline[1]
+    segment["segment_nbr"]    = seg_id
     segment["segment_txt"]    = segment_content[2]
     segment["segment_link"]   = "https://www.coursera.org/learn/cs-410/lecture/rLpwp?t=" + str(get_time_as_seconds(timeline[0]))
 
@@ -31,7 +35,7 @@ def get_segment_details(course_id, week_nbr, video_id, segment_raw_txt):
 
 # persist the segment content to a csv file
 def write_segments_to_csv(segments):
-    csv_columns = ["key", "timeline_start", "timeline_end",  "segment_link", "segment_txt"]
+    csv_columns = ["key", "course_id", "week_nbr", "video_id", "timeline_start", "timeline_end", "segment_nbr", "segment_link", "segment_txt"]
     try:
         with open("courseera_video_segments.csv", 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
@@ -79,6 +83,7 @@ def main():
     
 
     # write the final output to a csv
+    seg_content_final_list.sort(key=lambda a : (a["course_id"], a["week_nbr"], a["video_id"], a["segment_nbr"]))
     write_segments_to_csv(seg_content_final_list)
 
 
