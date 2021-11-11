@@ -1,0 +1,12 @@
+prefix = "/Users/kartikpatel/Desktop/CS 410/Final Project/CourseProject"
+dataset = "course"
+corpus = "line.toml"
+index = "idx"
+
+stop-words = "stopwords.txt"
+
+[[analyzers]]
+method = "ngram-word"
+ngram = 1
+filter = "default-unigram-chain"
+
