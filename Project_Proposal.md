@@ -16,6 +16,10 @@ segments.
 - Captain – Kartik Patel
 
 
+## What topic have you chosen?
+Intelligent Learning Platform- Build a search engine that can support video segment search. This would allow you to type in a query and see a ranked list of short
+video segments so that you can precisely locate which segment to watch in a lecture in order to know more about a concept. 
+
 ## Why this is a problem :
 Apart from searching videos by titles, There is no easy way to search by video content. This makes harder for users who are
 interested in finding precise locations of the videos where a concept or a term is mentioned.
