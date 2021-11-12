@@ -8,12 +8,12 @@ segments.
 
 ## What are the names and NetIDs of all your team members? Who is the captain? The captain will have more administrative duties than team members.
 
-Matthew Kryczka - kryczka3
-Selvaganapathy Thirugnanam - st26
-Diana Arita - dianama2
-Kartik Patel – kartikp2
+- Matthew Kryczka - kryczka3
+- Selvaganapathy Thirugnanam - st26
+- Diana Arita - dianama2
+- Kartik Patel – kartikp2
 
-Captain – Kartik Patel
+- Captain – Kartik Patel
 
 
 ## Why this is a problem :
@@ -49,15 +49,15 @@ video segments related to the concepts.
 
 ## Which programming language do you plan to use?
 
-scrapping, indexing, ranking  ---> Python
-UI                            ---> Javascript frameworks (either Angular or React)
-Backend                       ---> Python/Flask
+- scrapping, indexing, ranking  ---> Python
+- UI                            ---> Javascript frameworks (either Angular or React)
+- Backend                       ---> Python/Flask
 
 ## Time Allocation
 
-Scraping the video text	---> 10 hours
-Indexing	              ---> 20 hours
-Ranking                	---> 20 hours
-UI(Backend & Frontend)	---> 10 hours
-Mapping the video 	    ---> 20 hours
+- Scraping the video text	---> 10 hours
+- Indexing	              ---> 20 hours
+- Ranking                	---> 20 hours
+- UI(Backend & Frontend)	---> 10 hours
+- Mapping the video 	    ---> 20 hours
 
