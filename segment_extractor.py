@@ -3,6 +3,8 @@ import os
 import csv
 import glob
 import json
+import cv2
+from pathlib import Path
 
 # convert time to seconds
 def get_time_as_seconds(time):
@@ -33,16 +35,29 @@ def get_segment_details(course_metadata, course_id, week_nbr, video_id, segment_
     
     lesson_id = cm["id"]
     video_title = cm["title"]
+    segment["tas"] = get_time_as_seconds(timeline[0])
 
-    segment["segment_link"]   = "https://www.coursera.org/learn/cs-410/lecture/" + lesson_id + "?t=" + str(get_time_as_seconds(timeline[0]))
+    segment["segment_link"]   = "https://www.coursera.org/learn/cs-410/lecture/" + lesson_id + "?t=" + str(segment["tas"])
+
     segment["video_title"]    = video_title
     
     return segment
 
+def export_csv_for_indexing(docs):
+    csv_columns = ["course_id", "week_nbr", "video_id", "content"]
+    try:
+        with open("courseera_video_lessons.csv", 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            writer.writeheader()
+            for data in docs:
+                writer.writerow(data)
+    except IOError:
+        print("I/O error")
+
 
 # persist the segment content to a csv file
 def write_segments_to_csv(segments):
-    csv_columns = ["key", "course_id", "week_nbr", "video_id", "video_title", "timeline_start", "timeline_end", "segment_nbr", "segment_link", "segment_txt"]
+    csv_columns = ["key", "course_id", "week_nbr", "video_id", "video_title", "timeline_start", "timeline_end", "segment_nbr", "segment_link", "segment_txt", "pic_name"]
     try:
         with open("courseera_video_segments.csv", 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
@@ -57,12 +72,29 @@ def get_segments(course_metadata, course_id, video_id, week_nbr, srt_file):
     with open(srt_file, 'r') as f:
         content = f.read()
 
+        #get video file name. assuming it to be mp4. can be made dynamic later..
+        video_file_name = os.path.dirname(srt_file) + "/" + srt_file.split("/")[-1].split(".")[0] + ".mp4"
+        vidcap = cv2.VideoCapture(video_file_name)
+
     # split by segments
         segments = re.split("\n\n", content)
         seg_content_list = []
-    
+
         for segment in segments :
             seg_content = get_segment_details(course_metadata, course_id, week_nbr, video_id, segment)
+            m = int(seg_content["tas"]/60)  * 60
+
+            thumbnail_name = "pic_" +  str(course_id) + "_" + str(week_nbr) + "_" + str(video_id) + "_" + str(m)
+            seg_content["pic_name"] = thumbnail_name+".jpg"
+
+            imgfileName = "video_thumbnails/" + str(course_id) + "/" + thumbnail_name+".jpg"
+
+            if (not os.path.exists(imgfileName)):
+                vidcap.set(cv2.CAP_PROP_POS_MSEC,(m* 1000))
+                success,image = vidcap.read()
+                cv2.imwrite(imgfileName, image)
+        
+            del seg_content["tas"]
             seg_content_list.append(seg_content)
 
     return seg_content_list
@@ -97,6 +129,21 @@ def load_sylabus_metadata(course_id, sylabus_as_json):
     return course_metadata
 
 
+def getDocForIndexing(course_id, week_nbr, video_id, file):
+
+    doc = {}    
+    content = ""
+    with open(file, 'r') as f:
+        content =  f.read()
+        content = content.replace("\n","")
+        content = content.replace("\r","")
+
+    doc["course_id"] = course_id
+    doc["week_nbr"]  = week_nbr
+    doc["video_id"]  = video_id
+    doc["content"]   = content
+
+    return doc
 
 def main():
     
@@ -104,6 +151,9 @@ def main():
     course_id = "cs-410"
     scan_dir = "courseera-dl/cs-410/"
     srt_files = glob.glob(scan_dir + '**/*.srt', recursive=True)
+    txt_files = glob.glob(scan_dir + '**/*.txt', recursive=True)
+
+    docs = []
     
     course_metadata = load_sylabus_metadata(course_id, "courseera-dl/cs-410-syllabus-raw.json")
 
@@ -113,6 +163,10 @@ def main():
 
         seg_content_srt = get_segments(course_metadata, course_id, video_id, week_nbr, srt)
         seg_content_final_list.extend(seg_content_srt)
+
+        p = Path(srt)
+        txt_file_name = str(p.parents[0]) + "/" + p.stem + ".txt"
+        docs.append(getDocForIndexing(course_id, week_nbr, video_id, txt_file_name))
             
             # print(os.path.basename(srt) + " --> " +  str(len(seg_content_final_list)))
             # print(os.path.dirname(srt).split("/")[3] + "==> " + str(video_id) + " -- > " + str(video_id.isdigit()))
@@ -121,6 +175,9 @@ def main():
     # write the final output to a csv
     seg_content_final_list.sort(key=lambda a : (a["course_id"], a["week_nbr"], a["video_id"], a["segment_nbr"]))
     write_segments_to_csv(seg_content_final_list)
+
+    docs.sort(key=lambda a : (a["course_id"], a["week_nbr"], a["video_id"]))
+    export_csv_for_indexing(docs)
 
 
 if __name__ == "__main__":
