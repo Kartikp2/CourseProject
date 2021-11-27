@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#parentContainer {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0px;
+}
+
+#navContainer {
+  padding: 0px;
+}
+
+#bannerContainer {
+  margin: 0px;
+}
+
+#contentContainer {
+  padding-top: 30px;
+}
+
+#filterDiv {
+}
+
+.filterItem {
+  /* width: 100px; */
+  padding-right: 20px;
+}
+
+#resultsContainer {
+  padding:0px;
+  width: 100%;
+}
+
+#title {
+  text-align: center;
+  width: 100%;
+  color: antiquewhite;
+}
+
+#titleSpan {
+  color:azure;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.navbar-custom {
+  /* background-color: #0f2040; */
+  background-color: #132b4b;
+}
+
+#srchBtn {
+  /* background-color: #0f2040; */
+  background-color: #132b4b;
+  color: azure;
+}
+
+.card {
+  border-style: none;
+}
+
+.card-body {
+  padding-top: 0px;
+}
+
+.card-title {
+  padding-top: 20px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.card-img-top {
+  border-width: thin;
+  border-style: solid;
+  transition: transform .2s;
+}
+
+.card-text {
+  font-size: 13px;
+}
+
+#resCnt {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.card-title {
+  font-size: 14px;
+  text-overflow: nowrap;
+  background-color: transparent;
+  padding-left: 0px;
+}
+
+.card-header {
+  background-color: transparent;
+  text-align: center;
+  padding: 0px;
+}
+
+.baseBlock:hover {
+	-webkit-transform: translate(0, -8px);
+	-moz-transform: translate(0, -8px);
+	-ms-transform: translate(0, -8px);
+	-o-transform: translate(0, -8px);
+	transform: translate(0, -8px);
+	box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}
