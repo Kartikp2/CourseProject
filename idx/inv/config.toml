@@ -1,9 +1,9 @@
 stop-words = "stopwords.txt"
 index = "idx"
 corpus = "line.toml"
+prefix = "/Users/Diana/OneDrive/Desktop/Github/CourseProject"
 dataset = "course"
-prefix = "/Users/kartikpatel/Desktop/CS 410/Final Project/CourseProject"
 [[analyzers]]
 	filter = "default-unigram-chain"
-	ngram = 1
 	method = "ngram-word"
+	ngram = 1
