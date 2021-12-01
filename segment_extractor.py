@@ -68,7 +68,7 @@ def write_segments_to_csv(segments):
                    "timeline_end", "segment_nbr", "segment_link", "segment_txt", "pic_name"]
     try:
         with open("courseera_video_segments.csv", 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimeter = '~~')
             writer.writeheader()
             for data in segments:
                 writer.writerow(data)
