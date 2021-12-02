@@ -62,6 +62,6 @@ class SearchEngine:
         for num, (d_id, _) in enumerate(top_docs):
             course = self.df.iloc[d_id-1].course_id
             week = int(self.df.iloc[d_id-1].week_nbr )
-            lesson = int(self.df.iloc[d_id-1].video_id)
+            lesson = int(self.df.iloc[d_id].video_id)
             top_links.append((course,week,lesson)) # (course, week, lesson)
         return top_links
