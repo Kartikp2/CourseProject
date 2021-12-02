@@ -20,7 +20,7 @@ class MyServer(BaseHTTPRequestHandler):
         """ Sends a dictionary (JSON) back to the client """
         self.wfile.write(bytes(dumps(d), "utf8"))
 
-    def get_video_details(self,rankerResult):
+    def get_video_details(self,rankerResult,query):
         with open ('/Users/Diana/OneDrive/Desktop/Github/CourseProject/courseera_video_segments_copy.csv', 'rt', encoding="utf-8") as file:
             relevantLines = []
             for line in file:
@@ -30,11 +30,15 @@ class MyServer(BaseHTTPRequestHandler):
             # if one word is searched then look for the first line that has the word
             # if more than one word then see if any of the lines have the whole query and use that
             # otherwise use the first line
+            temp = relevantLines[0].split("~")
+            for line in relevantLines:
+                elements = line.split("~")
+                if (query in elements[9]):
+                    temp = line.split("~")
+                    break
 
-            tempFirst = relevantLines[0].split("~")
-
-            #if time_start has a 0 minute then look for the first line that has a 01 minute and use that image
-            timeStartMinute = tempFirst[5][4]
+            # if time_start has a 0 minute then look for the first line that has a 01 minute and use that image
+            timeStartMinute = temp[5][4]
             imgPath = ""
             if (timeStartMinute == '0'):
                 for line in relevantLines:
@@ -43,25 +47,25 @@ class MyServer(BaseHTTPRequestHandler):
                         imgPath = elements[10]
                         break
             else:
-                imgPath = tempFirst[10]
+                imgPath = temp[10]
 
-            f2 = os.path.dirname(__file__) + "\\video_thumbnails\\" + tempFirst[1] + "\\" + imgPath
+            # setting image path and then encoding
+            f2 = os.path.dirname(__file__) + "\\video_thumbnails\\" + temp[1] + "\\" + imgPath
             f2 = f2[:-1]
             with open(f2, "rb") as img:
                 image2 = base64.b64encode(img.read())
             
             result = {
-                "course" : tempFirst[1],
-                "week" : tempFirst[2],
-                "video_title" : tempFirst[4],
-                "text_preview": tempFirst[9],
-                "segment_link" : tempFirst[8],
+                "course" : temp[1],
+                "week" : temp[2],
+                "video_title" : temp[4],
+                "text_preview": temp[9],
+                "segment_link" : temp[8],
                 "img": image2.decode("utf-8")
             }
             return result
     
     def do_GET(self):
-        #print('search string :' + str(request.args.get("q")))
         query_components = parse_qs(urlparse(self.path).query)
         q = query_components["q"] 
         
@@ -71,7 +75,7 @@ class MyServer(BaseHTTPRequestHandler):
         result = []
         for element in rankerResult:
             element = '~'.join(map(str,element))
-            result.append(self.get_video_details(element))
+            result.append(self.get_video_details(element, q[0]))
 
         self.send_response(200)
         self._send_cors_headers()
