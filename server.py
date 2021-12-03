@@ -27,9 +27,8 @@ class MyServer(BaseHTTPRequestHandler):
                 if (rankerResult in line):
                     relevantLines.append(line)
 
-            # if one word is searched then look for the first line that has the word
-            # if more than one word then see if any of the lines have the whole query and use that
-            # otherwise use the first line
+            # Look for the first line that has the query
+            # if not found then use the first line
             temp = relevantLines[0].split("~")
             for line in relevantLines:
                 elements = line.split("~")
