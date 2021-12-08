@@ -6,9 +6,10 @@ import json
 from json import dumps
 import os
 import base64
+from pathlib import Path
 
 class MyServer(BaseHTTPRequestHandler):
-    searchEngine = SearchEngine('/Users/Diana/OneDrive/Desktop/Github/CourseProject/courseera_video_lessons.csv', 'config.toml')
+    searchEngine = SearchEngine()
 
     def _send_cors_headers(self):
         """ Sets headers required for CORS """
@@ -21,7 +22,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.write(bytes(dumps(d), "utf8"))
 
     def get_video_details(self,rankerResult,query):
-        with open ('/Users/Diana/OneDrive/Desktop/Github/CourseProject/courseera_video_segments_copy.csv', 'rt', encoding="utf-8") as file:
+        with open (str(Path('courseera_video_segments.csv').absolute()), 'rt', encoding="utf-8") as file:
             relevantLines = []
             for line in file:
                 if (rankerResult in line):
@@ -49,7 +50,7 @@ class MyServer(BaseHTTPRequestHandler):
                 imgPath = temp[10]
 
             # setting image path and then encoding
-            f2 = os.path.dirname(__file__) + "\\video_thumbnails\\" + temp[1] + "\\" + imgPath
+            f2 = os.path.dirname(__file__) + "/video_thumbnails/" + temp[1] + "/" + imgPath
             f2 = f2[:-1]
             with open(f2, "rb") as img:
                 image2 = base64.b64encode(img.read())
@@ -67,7 +68,7 @@ class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
         query_components = parse_qs(urlparse(self.path).query)
         q = query_components["q"] 
-        
+
         rankerResult = self.searchEngine.query_result(q[0])
         print(rankerResult)
 

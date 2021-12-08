@@ -1,4 +1,4 @@
-prefix = "/Users/Diana/OneDrive/Desktop/Github/CourseProject"
+prefix = "."
 dataset = "course"
 corpus = "line.toml"
 index = "idx"
