@@ -80,7 +80,7 @@ class SegmentExtractor:
 
         csv_columns = ["course_id", "week_nbr", "video_id", "content"]
         try:
-            with open("courseera_video_lessons.csv", 'w') as csvfile:
+            with open("coursera_video_lessons.csv", 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
                 writer.writeheader()
                 for data in docs:
@@ -100,7 +100,7 @@ class SegmentExtractor:
         csv_columns = ["key", "course_id", "week_nbr", "video_id", "video_title", "timeline_start",
                        "timeline_end", "segment_nbr", "segment_link", "segment_txt", "pic_name"]
         try:
-            with open("courseera_video_segments.csv", 'w') as csvfile:
+            with open("coursera_video_segments.csv", 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimiter = '~')
                 writer.writeheader()
                 for data in segments:
