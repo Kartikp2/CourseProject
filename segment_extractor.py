@@ -142,8 +142,8 @@ class SegmentExtractor:
     def get_segments(self, course_metadata, course_id, week_nbr, lesson_nbr, video_id, srt_file):
 
         """
-        extract segment details and generate thumbnail image for each segment. All the segment within the given minute share the
-        same thumbnal
+        Extracts segment details and generates a thumbnail image for each segment. All the segments within a given minute share the
+        same thumbnail
         """
 
         with open(srt_file, 'r') as f:
@@ -246,7 +246,7 @@ class SegmentExtractor:
     def getDocForIndexing(self, course_id, week_nbr, video_id, file):
 
         """
-        this method extracts the subtitiles text for every video by course, week and store 1 line per video. Each line is treated as a document
+        This method extracts the subtitiles text for every video by course, week and store 1 line per video. Each line is treated as a document
         """
 
         doc = {}
@@ -342,7 +342,7 @@ class SegmentExtractor:
 def main():
 
     """
-    Segment Extractor bootstrap code to parse video segment metadata for the configured courses. currently we use parse for
+    Segment Extractor bootstrap code to parse video segment metadata for the configured courses. Currently we use parse for
     3 courses. We can always pass this as a command line arguments.
     """
 
