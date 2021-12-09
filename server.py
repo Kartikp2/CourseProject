@@ -39,22 +39,20 @@ class MyServer(BaseHTTPRequestHandler):
 
             # if time_start has a 0 minute then look for the first line that has a 01 minute and use that image
             timeStartMinute = temp[5][4]
-            imgPath = ""
+            imgPath = temp[10]
             if (timeStartMinute == '0'):
                 for line in relevantLines:
                     elements = line.split("~")
                     if (elements[5][4] == '1'):
                         imgPath = elements[10]
                         break
-            else:
-                imgPath = temp[10]
 
             # setting image path and then encoding
-            f2 = os.path.dirname(__file__) + "/video_thumbnails/" + temp[1] + "/" + imgPath
+            f2 = os.path.normpath(os.path.dirname(__file__) + "/video_thumbnails/" + temp[1] + "/" + imgPath)
             f2 = f2[:-1]
             with open(f2, "rb") as img:
                 image2 = base64.b64encode(img.read())
-            
+            f2 = f2[:-1]
             result = {
                 "course" : temp[1],
                 "week" : temp[2],

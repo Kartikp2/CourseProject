@@ -38,7 +38,7 @@ class SearchEngine:
         
         file = self.path[0:self.path.rfind('/') + 1] + 'course/'
         new_data_file = file + 'course.dat'
-        with open(new_data_file, 'w') as f:
+        with open(new_data_file, 'w', encoding="utf-8") as f:
             for index, row in df.iterrows():
                 text = row['content']
                 f.write(text)
