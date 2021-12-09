@@ -1,5 +1,7 @@
 # Smart Video Search Enigne
 
+Team: Diana Arita, Kartik Patel, Matthew Kryczka, Selvaganapathy Thirugnanam
+
 Presentation: https://mediaspace.illinois.edu/media/t/1_tpvrr7g7
 
 # Problem Statement
