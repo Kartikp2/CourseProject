@@ -42,6 +42,9 @@ Download code from github: https://github.com/Kartikp2/CourseProject.git
   - Go to browser and hit url https://localhost:3000
 
 # Files
+
+**Not all of the coursera-dl files were uploaded as they take up a lot of space ( the project is already close to 1GB!)**
+
 - Documents 
   - Contains proposal, progress report, powerpoint, and final documentation
 - Course
