@@ -22,7 +22,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.write(bytes(dumps(d), "utf8"))
 
     def get_video_details(self,rankerResult,query):
-        with open (str(Path('courseera_video_segments.csv').absolute()), 'rt', encoding="utf-8") as file:
+        with open (str(Path('coursera_video_segments.csv').absolute()), 'rt', encoding="utf-8") as file:
             relevantLines = []
             for line in file:
                 if (rankerResult in line):

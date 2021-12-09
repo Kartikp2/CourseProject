@@ -9,7 +9,7 @@ from pathlib import Path
 
 class SearchEngine:
     def __init__(self):
-        self.path = str(Path('courseera_video_lessons.csv').absolute())
+        self.path = str(Path('coursera_video_lessons.csv').absolute())
         self.df = self.build_corpus()
         self.config = 'config.toml'
         self.idx = self.build_idx()
