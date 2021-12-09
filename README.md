@@ -59,6 +59,7 @@ Download code from github: https://github.com/Kartikp2/CourseProject.git
   - Each line is a lecture
 - coursera_video_segments
   - Used by backend to further narrow query results
+  - Each line is a transcript segment
 - search_engine.py
   - Using Metapy library to build the search ranker. Build corpus, inverted index, and use OkapiBM25 to rank queries
 - server.py
