@@ -43,7 +43,7 @@ Download code from github: https://github.com/Kartikp2/CourseProject.git
 
 # Files
 - Documents 
-  - Contains proposal, progress report, powerpoint, final documentation
+  - Contains proposal, progress report, powerpoint, and final documentation
 - Course
   - Contains course data for ranking and line.toml file
 - idx/inv
