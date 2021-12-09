@@ -4,6 +4,8 @@ Team: Diana Arita, Kartik Patel, Matthew Kryczka, Selvaganapathy Thirugnanam
 
 Presentation: https://mediaspace.illinois.edu/media/t/1_tpvrr7g7
 
+Documentation: https://github.com/Kartikp2/CourseProject/blob/main/Documents/CS-410%20Course%20Project%20Documentation.pdf
+
 # Problem Statement
 
 There is no easy way to search by video content. This makes it hard for users who are interested in finding precise locations of the videos where a concept or a term is mentioned.
