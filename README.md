@@ -33,7 +33,7 @@ BM25)
 - Coursera-dl package: https://github.com/coursera-dl/coursera-dl
 - Metapy library: https://github.com/meta-toolkit/metapy
 
-# Running UI
+# How to run UI!
 Download code from github: https://github.com/Kartikp2/CourseProject.git
 - Run backend
   - Be in the directory! ( same as server.py)
